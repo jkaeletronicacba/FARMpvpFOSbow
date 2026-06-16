@@ -162,10 +162,14 @@ end;
 procedure ThreadCombatActions;
 var
   TargetIndex: Integer;
+  CurrentDist, LastDist: Integer;
+  StuckCount: Integer;
 begin
   print('Servico CombatActions iniciado');
   ServicePVP := True;
   r := Radio;
+  LastDist := -1;
+  StuckCount := 0;
 
   repeat
     Engine.FaceControl(0, True);
@@ -179,6 +183,8 @@ begin
         PVPTargetName := CharList(c).Name;
         print('Char war ' + PVPTargetName + ' em range');
         OnCombat := True;
+        LastDist := -1;
+        StuckCount := 0;
       end;
 
       if (not ZoneInCity)
@@ -189,6 +195,8 @@ begin
         PVPTargetName := CharList(c).Name;
         print('Estou no target de ' + PVPTargetName + ' e ele esta em range');
         OnCombat := True;
+        LastDist := -1;
+        StuckCount := 0;
       end;
 
       if OnCombat then
@@ -214,12 +222,6 @@ begin
         Engine.SetTarget(PVPTargetName);
         Delay(100);
 
-        if not User.Target.Visible then
-        begin
-          ReposicionarSemVisao(TargetIndex);
-          Continue;
-        end;
-
         if User.Target.IsMember then
         begin
           Engine.CancelTarget;
@@ -227,11 +229,28 @@ begin
           Break;
         end;
 
-        if User.DistTo(CharList(TargetIndex)) > r then
+        CurrentDist := User.DistTo(CharList(TargetIndex));
+
+        if CurrentDist > r then
         begin
           print(PVPTargetName + ' saiu do range');
           OnCombat := False;
           Break;
+        end;
+
+        if (LastDist <> -1) and (Abs(CurrentDist - LastDist) < 25) and (CurrentDist > 250) then
+          StuckCount := StuckCount + 1
+        else
+          StuckCount := 0;
+
+        LastDist := CurrentDist;
+
+        if StuckCount >= 4 then
+        begin
+          ReposicionarSemVisao(TargetIndex);
+          LastDist := -1;
+          StuckCount := 0;
+          Continue;
         end;
 
         if User.Dead then
