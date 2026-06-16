@@ -107,17 +107,17 @@ begin
 end;
 
 
-// Carrega configuracao de PVP, se existir.
+// Carrega o set fixo de PVP, se existir.
 procedure LoadPvpConfig;
 begin
-  if FileExists(ExePath + '\Settings\' + MyName + 'PVP.xml') then
+  if FileExists(ExePath + '\Settings\SendFARMPVP.xml') then
   begin
-    Engine.LoadConfig(MyName + 'PVP.xml');
+    Engine.LoadConfig('SendFARMPVP.xml');
     PvpSettingLoaded := True;
-    print('Configuracao de PVP carregada');
+    print('Set de PVP SendFARMPVP carregado');
   end
   else
-    print('Configuracao de PVP nao encontrada: ' + MyName + 'PVP.xml');
+    print('Set de PVP nao encontrado: SendFARMPVP.xml');
 end;
 
 
