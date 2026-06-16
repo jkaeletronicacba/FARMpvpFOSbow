@@ -39,7 +39,7 @@ var
     'BgAdventure','GnomikONA','NumerJeden','XGaticaX','Miohi','SmalBaby'
   ];
 
-  OutCity, NpcBufferOn, ServicePVP, ServiceIfDead, ServiceTeleport,
+  OutCity, NpcBufferOn, ServicePVP, ServiceTeleport,
   ServiceIfNeedBuff, OnCombat, ZoneInCity, ZoneGrocerNPC, ZoneGrocerPort,
   ZoneGrocerLadder, ZoneFrontGrocer, ZoneFountainGrocer, ZoneMagor,
   ZoneGKFront, ZoneGK, ZonePet, ZonePet2, ZoneTeleportHellbound,
@@ -118,33 +118,6 @@ begin
   end
   else
     print('Configuracao de PVP nao encontrada: ' + MyName + 'PVP.xml');
-end;
-
-
-// Controle quando morrer.
-procedure ThreadIfDead;
-begin
-  print('Servico IfDead iniciado');
-  ServiceIfDead := True;
-
-  repeat
-    if User.Dead then
-    begin
-      Engine.FaceControl(0, False);
-      Delay(2 * k);
-
-      print('Morri. Voltando para a cidade.');
-      Engine.GoHome;
-      Delay(5 * k);
-
-      LoadFarmConfig;
-    end;
-
-    Delay(1 * k);
-  until ZoneInCity;
-
-  ServiceIfDead := False;
-  print('Servico IfDead finalizado');
 end;
 
 
@@ -467,9 +440,6 @@ begin
     if (not ZoneInCity) and (not ServiceIfNeedBuff) and NpcBufferOn then
       Script.NewThread(@ThreadIfNeedBuff);
 
-    if (not ZoneInCity) and (not ServiceIfDead) then
-      Script.NewThread(@ThreadIfDead);
-
     if (not ZoneInCity) and (not ServicePVP) then
       Script.NewThread(@ThreadCombatActions);
 
@@ -486,7 +456,6 @@ begin
 
   PvpSettingLoaded := False;
   ServicePVP := False;
-  ServiceIfDead := False;
   ServiceTeleport := False;
   ServiceIfNeedBuff := False;
   OnCombat := False;
