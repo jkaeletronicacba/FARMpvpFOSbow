@@ -28,7 +28,7 @@ var
     'pituf0','pegamucho','oblix','mortifago','lastdwarfspoil','wirek',
     'sweetdina','goleador2','goleador1','Javelina','katina','ilililiilliil',
     'euterpi','yougoodtogo','luckylee','yabadabadu','lililili','enchantra',
-    'megamente','zmpoutsam','lookwhatifind','Mortifago','littleraidboss',
+    'megamente','LaRastrera','zmpoutsam','lookwhatifind','Mortifago','littleraidboss',
     'nuze','MatthewFlorida','suse','s1l1','fedora','shentai','GNU','Blanina',
     'otrobulto','mhtsiaspoil','litleraidboss','BombaCha','Fantastic4',
     'BufferBooster','SERVERPUTO','MissPoronga','StinK','LecoRJ','DUDYY',
