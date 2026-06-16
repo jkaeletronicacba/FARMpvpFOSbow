@@ -8,6 +8,8 @@ const
 
   // Raio de ataque. Se o alvo sair deste raio, o PVP para.
   Radio = 5000;
+  RecuoSemVisao = 200;
+  DesvioSemVisao = 400;
 
 var
   Item: TL2Item;
@@ -121,6 +123,41 @@ begin
 end;
 
 
+// Move o char para tras do alvo e para um lado aleatorio quando perde visao.
+procedure ReposicionarSemVisao(TargetIndex: Integer);
+var
+  dx, dy, dist: Double;
+  BackX, BackY, SideX, SideY: Integer;
+  NewX, NewY: Integer;
+begin
+  dx := User.X - CharList(TargetIndex).X;
+  dy := User.Y - CharList(TargetIndex).Y;
+  dist := Sqrt((dx * dx) + (dy * dy));
+
+  if dist < 1 then
+    dist := 1;
+
+  BackX := Round((dx / dist) * RecuoSemVisao);
+  BackY := Round((dy / dist) * RecuoSemVisao);
+
+  SideX := Round((-dy / dist) * DesvioSemVisao);
+  SideY := Round((dx / dist) * DesvioSemVisao);
+
+  if Random(2) = 0 then
+  begin
+    SideX := -SideX;
+    SideY := -SideY;
+  end;
+
+  NewX := User.X + BackX + SideX;
+  NewY := User.Y + BackY + SideY;
+
+  print('Sem visao do alvo. Reposicionando para destravar.');
+  Engine.MoveTo(NewX, NewY, User.Z);
+  Delay(1500);
+end;
+
+
 // Controle de PVP.
 procedure ThreadCombatActions;
 var
@@ -176,6 +213,12 @@ begin
 
         Engine.SetTarget(PVPTargetName);
         Delay(100);
+
+        if not User.Target.Visible then
+        begin
+          ReposicionarSemVisao(TargetIndex);
+          Continue;
+        end;
 
         if User.Target.IsMember then
         begin
