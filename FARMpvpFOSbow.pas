@@ -38,7 +38,8 @@ var
     'FranekKowadlo','Tatianamyrca','Cebulcia','[ARE]SSSSS','BlankaPL',
     'Labunistanka1','Nemadon','Podgorcanka','BellaCiao','G1L3','LaPonky',
     'buscadora','T0rtaz0s','ilugano','GodQueen','TrullyBully','Plana',
-    'BgAdventure','GnomikONA','NumerJeden','XGaticaX','Miohi','SmalBaby'
+    'BgAdventure','GnomikONA','NumerJeden','XGaticaX','Miohi','SmalBaby',
+    'Vel','FassadeBau1'
   ];
 
   OutCity, NpcBufferOn, ServicePVP, ServiceTeleport,
