@@ -39,7 +39,8 @@ var
     'Labunistanka1','Nemadon','Podgorcanka','BellaCiao','G1L3','LaPonky',
     'buscadora','T0rtaz0s','ilugano','GodQueen','TrullyBully','Plana',
     'BgAdventure','GnomikONA','NumerJeden','XGaticaX','Miohi','SmalBaby',
-    'Vel','FassadeBau1','Opeth','Gylary','xChiCHARiTAx','Vela'
+    'Vel','FassadeBau1','Opeth','Gylary','xChiCHARiTAx','Vela',
+    'CuteDwarfy','[INI]Rodriguito'
   ];
 
   OutCity, NpcBufferOn, ServicePVP, ServiceTeleport,
