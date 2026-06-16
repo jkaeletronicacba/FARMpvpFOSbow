@@ -39,7 +39,7 @@ var
     'Labunistanka1','Nemadon','Podgorcanka','BellaCiao','G1L3','LaPonky',
     'buscadora','T0rtaz0s','ilugano','GodQueen','TrullyBully','Plana',
     'BgAdventure','GnomikONA','NumerJeden','XGaticaX','Miohi','SmalBaby',
-    'Vel','FassadeBau1'
+    'Vel','FassadeBau1','Opeth','Gylary'
   ];
 
   OutCity, NpcBufferOn, ServicePVP, ServiceTeleport,
